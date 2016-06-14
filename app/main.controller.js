@@ -1,5 +1,5 @@
 angular.module('app', []);
 
 angular.module('app').controller('MainController', function($scope) {
-    $scope.data = "doggiett";
+    $scope.data = "momdodfdett";
 })
