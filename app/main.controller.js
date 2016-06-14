@@ -1,6 +1,7 @@
 angular.module('app', []);
 
 angular.module('app').controller('MainController', function($scope) {
+    
     $scope.items = [
         'Skydiving',
         'Drive a Ferrari',
@@ -9,5 +10,13 @@ angular.module('app').controller('MainController', function($scope) {
 
     $scope.add = function(data) {
         $scope.items.push(data);
+        $scope.newItem= '';
+    }
+
+    $scope.remove = function(data) {
+        index = $scope.items.indexOf(data);
+        if (index > -1) {
+            $scope.items.splice(index, 1);
+        }
     }
 })
