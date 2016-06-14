@@ -7,7 +7,9 @@ var inject = require('gulp-inject');
 gulp.task('serve', [], function() {
 
     browserSync.init({
-        server: "./app"
+        server: {
+            baseDir: "./app" // This was the problem 
+        }
     });
 
 
@@ -18,10 +20,7 @@ gulp.task('serve', [], function() {
 });
 
 gulp.task('index', function () {
-  var target = gulp.src('./app/index.html');
-  // It's not necessary to read the files (will speed up things), we're only after their paths: 
-  var sources = gulp.src(['./app/*.js', './app/*.css'], {read: false});
- 
-  return target.pipe(inject(sources))
-    .pipe(gulp.dest('./app'));
+  gulp.src('./app/index.html')
+  .pipe(inject(gulp.src('./app/**/*.js', {read: false}), {ignorePath: 'app'}))
+  .pipe(gulp.dest('./app'));
 });
