@@ -22,7 +22,12 @@ angular.module('app').controller('MainController', function($scope, Item, $fireb
     };
 
     $scope.complete = function(data) {
-        data.complete = true;
+        index = $scope.items.indexOf(data);
+        if (index > -1) {
+            data.complete = true;
+            $scope.items.$save(index);
+        }
+
 
     };
 
