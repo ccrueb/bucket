@@ -17,6 +17,7 @@
   "dependencies": {
     "angular": "^1.5.6",
     "angularfire": "^1.2.0",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "components-font-awesome": "^4.6.3"
   }
 }

@@ -17,6 +17,9 @@
   
   <!-- endinject -->
 <!-- bower:css -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="styles/bootstrap-social.css">
   <!-- endinject -->
 </head>
 <body ng-app="app"  ng-cloak="true">
@@ -41,10 +44,14 @@
         </ul>
 
         <h1>Feed</h1>
-        <p>{{test | json}}</p>
-        <button ng-click="login()">Login</button>
+        <a ng-click="login()" class="btn btn-block btn-social btn-facebook">
+    <span class="fa fa-facebook"></span> Sign in with Facebook
+  </a>
+  
+
     </div>
     
+     
     
     
 
@@ -52,6 +59,8 @@
 <script src="/scripts/app.js"></script>
 <script src="/scripts/content/item.factory.js"></script>
 <script src="/scripts/content/main.controller.js"></script>
+<script src="/scripts/assets/js/docs.js"></script>
+<script src="/scripts/assets/js/jquery.js"></script>
 <!-- endinject -->
 </body>
 </html>
