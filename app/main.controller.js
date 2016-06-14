@@ -6,4 +6,8 @@ angular.module('app').controller('MainController', function($scope) {
         'Drive a Ferrari',
         'Travel to all seven contidents'
     ]
+
+    $scope.add = function(data) {
+        $scope.items.push(data);
+    }
 })
