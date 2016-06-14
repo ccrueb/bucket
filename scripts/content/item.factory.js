@@ -4,7 +4,7 @@ angular.module('app')
 
         function Item(name) {
             this.name = name;
-            this.completed = false;
+            this.complete = false;
         }
 
         return Item;
