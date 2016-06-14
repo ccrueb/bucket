@@ -1,12 +1,11 @@
 angular.module('app', []);
 
-angular.module('app').controller('MainController', function($scope) {
-    
+angular.module('app').controller('MainController', function($scope, Item) {
     
     $scope.items = [
-        'Skydiving',
-        'Drive a Ferrari',
-        'Travel to all seven contidents'
+        new Item('Skydiving'),
+        new Item('Drive a Ferrari'),
+        new Item('Travel to all seven contidents')
     ]
 
     $scope.logs = [
@@ -26,5 +25,11 @@ angular.module('app').controller('MainController', function($scope) {
         if (index > -1) {
             $scope.items.splice(index, 1);
         }
-    }
+    };
+
+    $scope.complete = function(data) {
+        $scope.remove(data);
+
+    };
+
 })
