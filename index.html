@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Bucketlist</title>
-    
+    <!-- bower:js -->
+  
+  <script src="bower_components/angular/angular.js"></script>
+  
+  <script src="bower_components/firebase/firebase.js"></script>
+  
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  
+  <script src="bower_components/angularfire/dist/angularfire.js"></script>
+  
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  
+  <!-- endinject -->
 <!-- bower:css -->
-  <!-- bower installed css files will go here... -->
   <!-- endinject -->
 </head>
-<body ng-app="app">
+<body ng-app="app"  ng-cloak="true">
     <div ng-controller="MainController">
         <h1>Your BucketList</h1>
-        <ul ng-repeat="item in items">
+        <ul ng-repeat="item in items" >
+        
             <li ng-if="!item.complete">{{item.name}}
                  <button ng-click="remove(item)">X</button>
                  <button ng-click="complete(item)">Done</button>
-                 <div><input type="text">
-                 <input type="text">
-                 <input type="text"></div>
+                 
                  </li>
+        
+        
         </ul>
         <input type="text" ng-model="newItem">
         <button ng-click="add(newItem)">Submit</button>
@@ -33,11 +45,7 @@
 
     </div>
     
-    <!-- bower:js -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/firebase/firebase.js"></script>
-  <script src="bower_components/angularfire/dist/angularfire.js"></script>
-  <!-- endinject -->
+    
 
   <!-- inject:js -->
 <script src="/scripts/app.js"></script>
