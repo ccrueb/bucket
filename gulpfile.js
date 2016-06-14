@@ -1,6 +1,7 @@
 var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
 var inject = require('gulp-inject');
+var bowerFiles = require('main-bower-files');
 
 
 // Static Server + watching scss/html files
@@ -8,19 +9,20 @@ gulp.task('serve', [], function() {
 
     browserSync.init({
         server: {
-            baseDir: "./app" // This was the problem 
+            baseDir: "./" // This was the problem 
         }
     });
 
 
 
    
-    gulp.watch("app/*.html").on('change', browserSync.reload);
-    gulp.watch("app/*.js").on('change', browserSync.reload);
+    gulp.watch("./*.html").on('change', browserSync.reload);
+    gulp.watch("./scripts/**/*.js").on('change', browserSync.reload);
 });
 
 gulp.task('index', function () {
-  gulp.src('./app/index.html')
-  .pipe(inject(gulp.src('./app/**/*.js', {read: false}), {ignorePath: 'app'}))
-  .pipe(gulp.dest('./app'));
+  gulp.src('./index.html')
+  .pipe(inject(gulp.src('./scripts/**/*.js', {read: false})))
+  .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', relative: true}))
+  .pipe(gulp.dest('./'));
 });

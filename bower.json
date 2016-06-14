@@ -1,0 +1,21 @@
+{
+  "name": "bucket",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Cal Rueb <crueb@amfam.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ccrueb/bucket",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.6",
+    "angularfire": "^1.2.0"
+  }
+}
