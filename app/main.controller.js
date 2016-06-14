@@ -2,10 +2,18 @@ angular.module('app', []);
 
 angular.module('app').controller('MainController', function($scope) {
     
+    
     $scope.items = [
         'Skydiving',
         'Drive a Ferrari',
         'Travel to all seven contidents'
+    ]
+
+    $scope.logs = [
+        {
+            name: "Go to Paris",
+            date: "6/10/2013"
+        }
     ]
 
     $scope.add = function(data) {
