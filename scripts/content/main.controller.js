@@ -2,9 +2,10 @@ angular.module('app').controller('MainController', function($scope, Item, $fireb
     
     var ref = new Firebase('https://bucktlist.firebaseio.com/')
 
-    $scope.items = $firebaseArray(ref.child('items'));
+    
     $scope.auth = $firebaseAuth(ref);
-    console.log($scope.auth.$getAuth() )
+    $scope.id = $scope.auth.$getAuth().uid;
+    $scope.items = $firebaseArray(ref.child($scope.id).child('items'));
     if ($scope.auth.$getAuth() == null) {
         $location.path('/login');
     }
