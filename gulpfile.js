@@ -22,7 +22,7 @@ gulp.task('serve', [], function() {
 
 gulp.task('index', function () {
   gulp.src('./index.html')
-  .pipe(inject(gulp.src('./scripts/**/*.js', {read: false})))
+  .pipe(inject(gulp.src(['./scripts/**/*.js','./styles/**/*.css'], {read: false})))
   .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', relative: true}))
   .pipe(gulp.dest('./'));
 });

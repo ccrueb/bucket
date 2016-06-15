@@ -1,15 +1,19 @@
-angular.module('app').controller('MainController', function($scope, Item, $firebaseArray, $firebaseAuth) {
+angular.module('app').controller('MainController', function($scope, Item, $firebaseArray, $firebaseAuth, $location) {
     
     var ref = new Firebase('https://bucktlist.firebaseio.com/')
 
     $scope.items = $firebaseArray(ref.child('items'));
-    var auth = $firebaseAuth(ref);
-    console.log(auth.$getAuth() )
+    $scope.auth = $firebaseAuth(ref);
+    console.log($scope.auth.$getAuth() )
+    if ($scope.auth.$getAuth() == null) {
+        $location.path('/login');
+    }
     $scope.login = function() {
-        if (auth.$getAuth() == null) {
-        auth.$authWithOAuthPopup("facebook").then(function(authData) {
+        if ($scope.auth.$getAuth() == null) {
+        $scope.auth.$authWithOAuthPopup("facebook").then(function(authData) {
             $scope.authData = authData;
     console.log("Logged in as:", authData.uid);
+    $location.path('/');
   }).catch(function(error) {
     console.log("Authentication failed:", error);
   });
