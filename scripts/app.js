@@ -1,1 +1,2 @@
-angular.module('app', ['firebase']);
+angular.module('app', ['firebase', 'ngRoute']);
+//
