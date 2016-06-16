@@ -1,0 +1,19 @@
+<div ng-controller="UserController">
+<h1>{{name}}'s Bucket List</h1>
+<ul ng-repeat="item in items" >
+        
+            <li ng-if="!item.complete">{{item.name}}
+                 
+                 </li>
+        
+        
+        </ul>
+
+
+<h1>{{name}}'s' Log</h1>
+        <ul ng-repeat="item in items">
+            <li ng-if="item.complete">You completed {{item.name}}
+                
+            </li>
+        </ul>
+</div>

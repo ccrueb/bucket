@@ -6,6 +6,9 @@ angular.module('app')
         }).
         when('/', {
             templateUrl: "../templates/homepage.html"
+        }).
+        when('/user/:name', {
+            templateUrl: "../templates/user.html"
         })
         
     })

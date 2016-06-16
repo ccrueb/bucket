@@ -4,8 +4,12 @@ angular.module('app').controller('MainController', function($scope, Item, $fireb
 
     
     $scope.auth = $firebaseAuth(ref);
-    $scope.id = $scope.auth.$getAuth().uid;
-    $scope.items = $firebaseArray(ref.child($scope.id).child('items'));
+    if($scope.auth.$getAuth() != null) {
+        $scope.id = $scope.auth.$getAuth().uid;
+        $scope.items = $firebaseArray(ref.child('coral').child('items'));
+    }
+    
+    
     if ($scope.auth.$getAuth() == null) {
         $location.path('/login');
     }
