@@ -16,7 +16,7 @@ gulp.task('serve', [], function() {
 
 
    
-    gulp.watch("./*.html").on('change', browserSync.reload);
+    gulp.watch("./**/*.html").on('change', browserSync.reload);
     gulp.watch("./scripts/**/*.js").on('change', browserSync.reload);
 });
 
