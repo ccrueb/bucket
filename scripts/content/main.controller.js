@@ -1,12 +1,9 @@
-angular.module('app').controller('MainController', function($scope, Item, $firebaseArray, $firebaseAuth, $location) {
-    
-    var ref = new Firebase('https://bucktlist.firebaseio.com/')
-
-    
-    $scope.auth = $firebaseAuth(ref);
+angular.module('app').controller('MainController', function($scope, Item, $firebaseArray, $firebaseAuth, $location, Firebase) {
+      
+    $scope.auth = $firebaseAuth(Firebase);
     if($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
-        $scope.items = $firebaseArray(ref.child('coral').child('items'));
+        $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
     }
     
     
