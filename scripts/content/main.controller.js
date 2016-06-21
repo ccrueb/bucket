@@ -1,5 +1,6 @@
-angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseAuth, $location, Firebase) {
+angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseAuth, $location, Firebase, PopularFactory) {
 
+    $scope.popularItems = PopularFactory.getPopularItems();
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
