@@ -8,9 +8,46 @@ angular.module('app').controller('MainController', function($scope, Item, $fireb
     
     
     if ($scope.auth.$getAuth() == null) {
+        console.log("Hereeeeee")
         $location.path('/login');
     }
-    $scope.login = function() {
+
+
+    //Create account
+    $scope.createUser = function() {
+        
+      $scope.message = null;
+      $scope.error = null;
+
+      $scope.auth.$createUser({
+        email: $scope.email,
+        password: $scope.password
+      }).then(function(userData) {
+          $scope.authData = userData;
+        $scope.message = "User created with uid: " + userData.uid;
+        $location.path('/');
+      }).catch(function(error) {
+        $scope.error = error;
+        console.log(error);
+      });
+    };
+
+    $scope.emailLogin = function() {
+        $scope.auth.$authWithPassword({
+  email: $scope.email,
+  password: $scope.password
+}).then(function(authData) {
+    $scope.authData = authData;
+  console.log("Logged in as:", authData.uid);
+  $location.path('/');
+}).catch(function(error) {
+  console.error("Authentication failed:", error);
+});
+    }
+
+
+    //Facebook login
+    $scope.facebookLogin = function() {
         if ($scope.auth.$getAuth() == null) {
         $scope.auth.$authWithOAuthPopup("facebook").then(function(authData) {
             $scope.authData = authData;
