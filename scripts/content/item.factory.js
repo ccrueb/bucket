@@ -1,5 +1,5 @@
 angular.module('app')
-    .factory('Item', function() {
+    .factory('Item', function () {
 
 
         function Item(name) {
