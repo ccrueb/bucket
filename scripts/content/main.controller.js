@@ -94,4 +94,14 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
 
     };
 
+    $scope.removeTrending = function (item) {
+        var index = $scope.popularItems.indexOf(item);
+            
+            if(index > -1) {
+                $scope.popularItems.splice(index, 1);
+        
+            }
+            
+    }
+
 })

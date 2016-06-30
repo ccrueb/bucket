@@ -79,7 +79,7 @@
             <div class="col-md-4">
                 <h5>Trending</h5>
                 <ul ng-repeat="pi in popularItems">
-                    {{pi}}
+                    <button ng-click="add(pi); removeTrending(pi)">+</button>{{pi}}
                 </ul>
             </div>
         </div>
