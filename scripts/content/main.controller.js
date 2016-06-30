@@ -4,8 +4,13 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
-        User.user = $firebaseObject(Firebase.child($scope.id));
-        $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
+        
+    User.user.$loaded().then(function() {
+         $scope.items = User.user.items;
+    }
+       
+    )   
+    
     }
 
 
@@ -51,18 +56,7 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
 
 
     //Facebook login
-    $scope.facebookLogin = function () {
-        console.log("Here");
-        if ($scope.auth.$getAuth() == null) {
-            $scope.auth.$authWithOAuthPopup("facebook").then(function (authData) {
-                $scope.authData = authData;
-                console.log("Logged in as:", authData.uid);
-                $location.path('/');
-            }).catch(function (error) {
-                console.log("Authentication failed:", error);
-            });
-        }
-    }
+    
 
 
     // login with Facebook
