@@ -1,9 +1,10 @@
-angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseAuth, $location, Firebase, PopularFactory) {
+angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User) {
 
     $scope.popularItems = PopularFactory.getPopularItems();
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
+        User.user = $firebaseObject(Firebase.child($scope.id));
         $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
     }
 

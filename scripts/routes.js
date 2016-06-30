@@ -9,6 +9,9 @@ angular.module('app')
         }).
         when('/user/:name', {
             templateUrl: "../templates/user.html"
+        }).
+        when('/buckets', {
+            templateUrl: "../templates/buckets.html"
         })
         
     })
