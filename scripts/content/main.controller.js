@@ -6,7 +6,9 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
         $scope.id = $scope.auth.$getAuth().uid;
         
     User.user.$loaded().then(function() {
-         $scope.items = User.user.items;
+        console.log(User.user.items)
+         $scope.items = User.items;
+         console.log($scope.items)
     }
        
     )   
@@ -73,14 +75,16 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
     }
 
     $scope.remove = function (data) {
-        index = $scope.items.indexOf(data);
+        console.log(data);
+        var index = $scope.items.indexOf(data);
         if (index > -1) {
             $scope.items.$remove(index);
         }
     };
 
     $scope.complete = function (data) {
-        index = $scope.items.indexOf(data);
+        console.log(data + " " + $scope.items);
+        var index = $scope.items.indexOf(data);
         if (index > -1) {
             data.complete = true;
             $scope.items.$save(index);
