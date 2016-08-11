@@ -1,23 +1,40 @@
-angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User) {
+angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User, Post) {
 
     $scope.popularItems = PopularFactory.getPopularItems();
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
+
+        $scope.user=  $firebaseObject(Firebase.child($scope.id))
+        $scope.allPosts = [];
+        $scope.user.$loaded().then(function() {
+            for(key in $scope.user.follows) {
+                $firebaseArray(Firebase.child($scope.user.follows[key]).child('posts')).$loaded().then(function(data){
+                for(var i = 0; i < data.length; i++) {
+                    $scope.allPosts.push(data[i]);
+                } 
+                console.log($scope.allPosts);        
+            
+        });
+            }
+        })
+        $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
+        $scope.posts = $firebaseArray(Firebase.child($scope.id).child('posts'));
         
-    User.user.$loaded().then(function() {
-        console.log(User.user.items)
-         $scope.items = User.items;
-         console.log($scope.items)
+        $scope.posts.$loaded().then(function(data) {
+             
+                for(var i = 0; i < data.length; i++) {
+                    $scope.allPosts.push(data[i]);
+                }    
+            console.log($scope.allPosts);
+        });
+        
     }
-       
-    )   
     
-    }
+    
 
 
     if ($scope.auth.$getAuth() == null) {
-        console.log("Hereeeeee")
         $location.path('/login');
     } else {
         $location.path('/');
@@ -69,10 +86,19 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
 
 
 
-    $scope.add = function (data) {
+    $scope.addItem = function (data) {
         $scope.items.$add(new Item(data));
         $scope.newItem = '';
     }
+    
+    $scope.addPost = function (data) {
+        data.user = $scope.user.name;
+        $scope.posts.$add(new Post(data));
+        $scope.post.text =''
+       console.log(data.user)
+    }
+    
+    
 
     $scope.remove = function (data) {
         console.log(data);
@@ -102,5 +128,4 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
             }
             
     }
-
 })
