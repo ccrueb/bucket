@@ -1,3 +1,4 @@
+//Post object factory
 angular.module('app')
     .factory('Post', function () {
         

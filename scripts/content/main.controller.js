@@ -1,105 +1,49 @@
+//Controls homepage
 angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User, Post) {
 
+    //Initalize values
     $scope.popularItems = PopularFactory.getPopularItems();
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
 
-        $scope.user=  $firebaseObject(Firebase.child($scope.id))
+        $scope.user = $firebaseObject(Firebase.child($scope.id))
         $scope.allPosts = [];
-        $scope.user.$loaded().then(function() {
-            for(key in $scope.user.follows) {
-                $firebaseArray(Firebase.child($scope.user.follows[key]).child('posts')).$loaded().then(function(data){
-                for(var i = 0; i < data.length; i++) {
-                    $scope.allPosts.push(data[i]);
-                } 
-                console.log($scope.allPosts);        
-            
-        });
+        //Add frind posts to newsfeed
+        $scope.user.$loaded().then(function () {
+            for (key in $scope.user.follows) {
+                $firebaseArray(Firebase.child($scope.user.follows[key]).child('posts')).$loaded().then(function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        $scope.allPosts.push(data[i]);
+                    }
+                });
             }
         })
         $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
         $scope.posts = $firebaseArray(Firebase.child($scope.id).child('posts'));
-        
-        $scope.posts.$loaded().then(function(data) {
-             
-                for(var i = 0; i < data.length; i++) {
-                    $scope.allPosts.push(data[i]);
-                }    
-            console.log($scope.allPosts);
-        });
-        
-    }
-    
-    
-
-
-    if ($scope.auth.$getAuth() == null) {
-        $location.path('/login');
-    } else {
-        $location.path('/');
-    }
-
-
-    //Create account
-    $scope.createUser = function () {
-
-        $scope.message = null;
-        $scope.error = null;
-
-        $scope.auth.$createUser({
-            email: $scope.email,
-            password: $scope.password
-        }).then(function (userData) {
-            $scope.authData = userData;
-            $scope.message = "User created with uid: " + userData.uid;
-            $location.path('/');
-        }).catch(function (error) {
-            $scope.error = error;
-            console.log(error);
-        });
-    };
-
-    $scope.emailLogin = function () {
-        $scope.auth.$authWithPassword({
-            email: $scope.email,
-            password: $scope.password
-        }).then(function (authData) {
-            $scope.authData = authData;
-            console.log("Logged in as:", authData.uid);
-            $location.path('/');
-        }).catch(function (error) {
-            console.error("Authentication failed:", error);
+        //Add your posts to newsfeed
+        $scope.posts.$loaded().then(function (data) {
+            for (var i = 0; i < data.length; i++) {
+                $scope.allPosts.push(data[i]);
+            }
         });
     }
 
-
-    //Facebook login
-    
-
-
-    // login with Facebook
-
-
-    // synchronize the object with a three-way data binding
-    // click on `index.html` above to see it used in the DOM!
-
-
-
+    //Add item to bucketlist
     $scope.addItem = function (data) {
         $scope.items.$add(new Item(data));
         $scope.newItem = '';
     }
-    
+
+    //Create a new post
     $scope.addPost = function (data) {
         data.user = $scope.user.name;
         $scope.posts.$add(new Post(data));
-        $scope.post.text =''
-       console.log(data.user)
+        $scope.post.text = ''
+        console.log(data.user)
     }
-    
-    
 
+    //Remove item from bucketlist
     $scope.remove = function (data) {
         console.log(data);
         var index = $scope.items.indexOf(data);
@@ -108,6 +52,7 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
         }
     };
 
+    //Move bucketlist item to log
     $scope.complete = function (data) {
         console.log(data + " " + $scope.items);
         var index = $scope.items.indexOf(data);
@@ -115,17 +60,13 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
             data.complete = true;
             $scope.items.$save(index);
         }
-
-
     };
 
+    //Remove item from trending
     $scope.removeTrending = function (item) {
         var index = $scope.popularItems.indexOf(item);
-            
-            if(index > -1) {
-                $scope.popularItems.splice(index, 1);
-        
-            }
-            
+        if (index > -1) {
+            $scope.popularItems.splice(index, 1);
+        }
     }
 })

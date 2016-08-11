@@ -1,3 +1,4 @@
+//Controls user pages
 angular.module('app')
   .controller('UserController', function ($scope, $routeParams, $firebaseArray,$firebaseObject, Firebase) {
 

@@ -1,20 +1,53 @@
 angular.module('app')
-.controller('LoginController', function($scope, $firebaseAuth, $firebaseObject, Auth, Firebase, $location, User) {
-        
-        
-        console.log($scope.auth);
+    .controller('LoginController', function ($scope, $firebaseAuth, $firebaseObject, Auth, Firebase, $location, User) {
+
+
+        $scope.auth = Auth;
+
+        //Login with facebook
         $scope.facebookLogin = function () {
-        console.log("Here");
-        if (Auth.$getAuth() == null) {
-            Auth.$authWithOAuthPopup("facebook").then(function (authData) {
-                $scope.authData = authData;
-                console.log($scope.auth);
-                console.log("Logged in as:", authData.uid);
-                User.user = $firebaseObject(Firebase.child(authData.uid));
+            if (Auth.$getAuth() == null) {
+                Auth.$authWithOAuthPopup("facebook").then(function (authData) {
+                    $scope.authData = authData;
+                    User.user = $firebaseObject(Firebase.child(authData.uid));
+                    $location.path('/');
+                }).catch(function (error) {
+                    console.log("Authentication failed:", error);
+                });
+            }
+
+        }
+
+        //Create account
+        $scope.createUser = function () {
+
+            $scope.message = null;
+            $scope.error = null;
+
+            $scope.auth.$createUser({
+                email: $scope.email,
+                password: $scope.password
+            }).then(function (userData) {
+                $scope.authData = userData;
+                $scope.message = "User created with uid: " + userData.uid;
                 $location.path('/');
             }).catch(function (error) {
-                console.log("Authentication failed:", error);
+                $scope.error = error;
+                console.log(error);
+            });
+        };
+
+        //Login with email
+        $scope.emailLogin = function () {
+            $scope.auth.$authWithPassword({
+                email: $scope.email,
+                password: $scope.password
+            }).then(function (authData) {
+                $scope.authData = authData;
+                console.log("Logged in as:", authData.uid);
+                $location.path('/');
+            }).catch(function (error) {
+                console.error("Authentication failed:", error);
             });
         }
-    }
     })
