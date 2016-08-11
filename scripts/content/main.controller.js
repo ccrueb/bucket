@@ -4,14 +4,13 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
-        $scope.user = $firebaseObject(Firebase.child($scope.id))
+        $scope.user=  $firebaseObject(Firebase.child($scope.id))
         $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
         $scope.posts = $firebaseArray(Firebase.child($scope.id).child('posts'));
     }
 
 
     if ($scope.auth.$getAuth() == null) {
-        console.log("Hereeeeee")
         $location.path('/login');
     } else {
         $location.path('/');
@@ -82,6 +81,7 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
     $scope.addPost = function (data) {
         $scope.posts.$add(new Post(data));
         $scope.post.text =''
+       console.log($scope.post.check)
     }
     
     

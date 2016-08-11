@@ -3,7 +3,10 @@ angular.module('app')
 
 
         function Post(data) {
-            this.text = data;
+            this.text = data.text;
+            this.type = data.type;
+            this.item = data.item;
+            
             
         }
 
