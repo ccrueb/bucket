@@ -105,7 +105,22 @@
 
         <button type="submit" ng-click="addPost(post)">Submit</button></form>
             <ul ng-repeat="post in posts">
-                <li>{{user.name}} {{post.type}} {{post.item.name}} {{post.text}}</li>
+                        <div class="col-sm-1">
+<div class="thumbnail">
+<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+</div><!-- /thumbnail -->
+</div><!-- /col-sm-1 -->
+
+<div class="col-sm-5">
+<div class="panel panel-default">
+<div class="panel-heading">
+<span class="text-muted">{{user.name}} {{post.type}} <strong>{{post.item.name}}</strong></span>
+</div>
+<div class="panel-body">
+{{post.text}}
+</div><!-- /panel-body -->
+</div><!-- /panel panel-default -->
+</div>
             </ul>
 
 
