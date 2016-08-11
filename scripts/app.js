@@ -13,7 +13,7 @@ angular.module('app').run(['$rootScope', '$location', 'Auth', function ($rootSco
         }
         else {
             console.log('ALLOW');
-            $location.path('/');
+            
         }
     });
 }]);
