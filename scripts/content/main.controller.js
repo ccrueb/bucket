@@ -1,11 +1,12 @@
-angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User) {
+angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User, Post) {
 
     $scope.popularItems = PopularFactory.getPopularItems();
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
-        User.user = $firebaseObject(Firebase.child($scope.id));
+        $scope.user = $firebaseObject(Firebase.child($scope.id))
         $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
+        $scope.posts = $firebaseArray(Firebase.child($scope.id).child('posts'));
     }
 
 
@@ -73,10 +74,17 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
 
 
 
-    $scope.add = function (data) {
+    $scope.addItem = function (data) {
         $scope.items.$add(new Item(data));
         $scope.newItem = '';
     }
+    
+    $scope.addPost = function (data) {
+        $scope.posts.$add(new Post(data));
+        $scope.post.text =''
+    }
+    
+    
 
     $scope.remove = function (data) {
         index = $scope.items.indexOf(data);
