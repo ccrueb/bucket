@@ -7,6 +7,7 @@ angular.module('app')
             this.item = data.item;
             var d = new Date();
             this.date = d.getDate();
+            this.user = data.user
         }
 
         return Post;

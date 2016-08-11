@@ -5,9 +5,32 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
     if ($scope.auth.$getAuth() != null) {
         $scope.id = $scope.auth.$getAuth().uid;
         $scope.user=  $firebaseObject(Firebase.child($scope.id))
+        $scope.allPosts = [];
+        $scope.user.$loaded().then(function() {
+            for(key in $scope.user.follows) {
+                $firebaseArray(Firebase.child($scope.user.follows[key]).child('posts')).$loaded().then(function(data){
+                for(var i = 0; i < data.length; i++) {
+                    $scope.allPosts.push(data[i]);
+                } 
+                console.log($scope.allPosts);        
+            
+        });
+            }
+        })
         $scope.items = $firebaseArray(Firebase.child($scope.id).child('items'));
         $scope.posts = $firebaseArray(Firebase.child($scope.id).child('posts'));
+        
+        $scope.posts.$loaded().then(function(data) {
+             
+                for(var i = 0; i < data.length; i++) {
+                    $scope.allPosts.push(data[i]);
+                }    
+            console.log($scope.allPosts);
+        });
+        
     }
+    
+    
 
 
     if ($scope.auth.$getAuth() == null) {
@@ -79,9 +102,10 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
     }
     
     $scope.addPost = function (data) {
+        data.user = $scope.user.name;
         $scope.posts.$add(new Post(data));
         $scope.post.text =''
-       console.log($scope.post.check)
+       console.log(data.user)
     }
     
     
@@ -112,5 +136,4 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
             }
             
     }
-
 })
