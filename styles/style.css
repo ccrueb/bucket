@@ -235,7 +235,7 @@ p {
 /* ==========================================================================
    Main styles
    ========================================================================== */
-background-photo {
+header {
   background: url(../img/background.jpg) no-repeat center center;
   width: 100%;
   padding: 20px 10px 60px 10px;
