@@ -2,7 +2,7 @@ angular.module('app')
     .config(function ($routeProvider) {
         $routeProvider.when('/login',
         {
-            templateUrl: "../templates/login.html"
+            templateUrl: "../templates/landing.html"
         }).
         when('/', {
             templateUrl: "../templates/homepage.html"
