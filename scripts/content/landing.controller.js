@@ -3,6 +3,7 @@ angular.module('app')
 
 
         $scope.auth = Auth;
+        $scope.login = true;
 
         //Login with facebook
         $scope.facebookLogin = function () {
@@ -49,5 +50,9 @@ angular.module('app')
             }).catch(function (error) {
                 console.error("Authentication failed:", error);
             });
+        }
+
+        $scope.swapForm = function() {
+            $scope.login = !$scope.login;
         }
     })

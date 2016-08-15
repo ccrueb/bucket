@@ -1,32 +1,47 @@
 <header ng-controller="LandingController">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-6">
-                <a href="/#/">
-                    <h2>BUCKET</h2>
+        <div ng-show="login">
+            <div class="row">
+            <div class="col-sm-3 col-sm-offset-8 box text-center">
+                <h3>Bucket</h3>
+                
+                    <input type="email" class="form-control box-input" placeholder="Email" ng-model="email" required>
+                    <input type="password" class="form-control box-input" placeholder="Password" ng-model="password" required>
+                    <button type="button" class="btn btn-primary btn-block" ng-click="emailLogin()">Log in</button>
+                    <p>or</p>
+                    <a ng-click="facebookLogin()" class="btn btn-block btn-social btn-facebook fb-login"><span class="fa fa-facebook"></span>Log in with Facebook
                 </a>
-            </div>
-            <div class="col-xs-6 signin text-right navbar-nav">
-                <a href="/#/login">Sign in</a>
-            </div>
-        </div>
-
-        <div class="row header-info">
-            <div class="col-sm-10 col-sm-offset-1 text-center">
-                <h1>Experience Together</h1>
-                <br />
-                <div class="col-xs-3">
-                    <input type="username" id="inputUsername" class="form-control" placeholder="Username" ng-model="username" required>
-                </div>
-                <div class="col-xs-3">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" ng-model="email" required autofocus>
-                </div>
-                <div class="col-xs-3">
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="password" required>
-                </div>
-                <div class="col-xs-1"><a class="btn btn-primary btn-lg scroll" ng-click="createUser()">Sign Up</a></div>
                 
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-8 box box-two text-center">
+                Don't have an account? <a ng-click="swapForm()">Sign up</a>
+            </div>
+        </div>
+        </div>
+
+        <div ng-show=!login>
+            <div class="row">
+            <div class="col-sm-3 col-sm-offset-8 box text-center">
+                <h3>Bucket</h3>
+                    <input type="email" class="form-control box-input" placeholder="Email" ng-model="email" required>
+                    <input type="text" class="form-control box-input" placeholder="Full Name" ng-model="full_name" required>
+                    <input type="text" class="form-control box-input" placeholder="Username" ng-model="username" required>
+                    <input type="password" class="form-control box-input" placeholder="Password" ng-model="password" required>
+                    <button type="button" class="btn btn-primary btn-block" ng-click="createUser()">Sign up</button>
+                    <p>or</p>
+                    <a ng-click="facebookLogin()" class="btn btn-block btn-social btn-facebook fb-login"><span class="fa fa-facebook"></span>Log in with Facebook
+                </a>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-8 box box-two text-center">
+                Already have an account? <a ng-click="swapForm()">Sign in</a>
+            </div>
+        </div>
+        </div>
+        
     </div>
 </header>
