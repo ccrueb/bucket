@@ -576,6 +576,11 @@ input:focus {
 	margin-top: 20px;
 }
 
+.incorrect {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
 
 
 

@@ -51,14 +51,14 @@ angular.module('app')
                 password: $scope.password
             }).then(function (authData) {
                 $scope.authData = authData;
-                console.log("Logged in as:", authData.uid);
                 $location.path('/');
             }).catch(function (error) {
-                console.error("Authentication failed:", error);
+                $scope.incorrect = true;
             });
         }
 
         $scope.swapForm = function () {
             $scope.login = !$scope.login;
+            $scope.incorrect = false;
         }
     })
