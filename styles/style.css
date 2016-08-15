@@ -235,7 +235,7 @@ p {
 /* ==========================================================================
    Main styles
    ========================================================================== */
-header {
+background-photo {
   background: url(../img/background.jpg) no-repeat center center;
   width: 100%;
   padding: 20px 10px 60px 10px;
@@ -542,6 +542,14 @@ select {
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
   resize: none;
+}
+
+.quick-add {
+  padding: 0px 5px;
+}
+
+ul {
+  padding-left: 0px;
 }
 
 
