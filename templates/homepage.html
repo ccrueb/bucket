@@ -1,4 +1,4 @@
-<div ng-controller="MainController">
+<div ng-controller="MainController" class="background">
     <!-- Static navbar -->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -26,54 +26,71 @@
         </div>
         <!--/.container-fluid -->
     </nav>
-    <div class="container">
-        <div class="row">
-            <form><input class="form-control" type="text" ng-model="post.text" placeholder="Share your experiences">
-                <select class="form-control" ng-model="post.type">
+
+
+    <div class="col-sm-6 col-sm-offset-1 post">
+        <div class="box">
+            <div class="row">
+                <div class="col-sm-6">
+                    <select class="form-control post-selection" ng-model="post.type">
                     <option value="" disabled selected>Select post type</option>
                     <option value="is working towards">Working Towards</option>
                     <option value="has completed">Completed</option>
                     <option value="is remembering">Remembering</option>
                 </select>
-                <select class="form-control" ng-model="post.item" ng-options="item as item.name for item in items">
+                </div>
+                <div class="col-sm-6 post">
+                    <select class="form-control" ng-model="post.item" ng-options="item as item.name for item in items">
                     <option value="" disabled selected>Select a bucket item</option>
                 </select>
-
-
-                <button type="submit" class="btn btn-success" ng-click="addPost(post)">Submit</button></form>
-            <h4>Feed</h4>
-            <div ng-repeat="post in allPosts" class="col-sm-8">
-                <div class="col-sm-2">
-                    <div class="thumbnail">
-                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                    </div>
-                    <!-- /thumbnail -->
-                </div>
-                <!-- /col-sm-1 -->
-
-                <div class="col-sm-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <span class="text-muted">{{post.user}} {{post.type}} <strong>{{post.item.name}}</strong></span>
-                        </div>
-                        <div class="panel-body">
-                            {{post.text}}
-                        </div>
-                        <!-- /panel-body -->
-                    </div>
-                    <!-- /panel panel-default -->
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <h4>What's your dream?</h4>
-                <form><input type="text" ng-model="newItem" placeholder="Add to bucklist...">
-                    <button class="btn btn-success" type="submit" ng-click="addItem(newItem)">Submit</button></form>
-                <h4>Trending</h4>
-                <ul ng-repeat="pi in popularItems">
-                    <button class="btn btn-primary" ng-click="add(pi); removeTrending(pi)">+</button> {{pi}}
-                </ul>
+            <div class="row">
+                <div class="col-sm-10 post">
+                    <textarea class="form-control post-area" type="text" ng-model="post.text" placeholder="Share your experiences"></textarea>
+                </div>
+                <div class="col-sm-2 post">
+                    <button type="submit" class="btn btn-success" ng-click="addPost(post)">Post</button>
+                </div>
             </div>
         </div>
+        <h4>Feed</h4>
+        <div ng-repeat="post in allPosts" class="col-sm-8">
+            <div class="col-sm-2">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                </div>
+                <!-- /thumbnail -->
+            </div>
+            <!-- /col-sm-1 -->
+
+            <div class="col-sm-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="text-muted">{{post.user}} {{post.type}} <strong>{{post.item.name}}</strong></span>
+                    </div>
+                    <div class="panel-body">
+                        {{post.text}}
+                    </div>
+                    <!-- /panel-body -->
+                </div>
+                <!-- /panel panel-default -->
+            </div>
+        </div>
+
+
+
     </div>
+    <div class="col-lg-3 col-lg-offset-1">
+
+        <h4>What's your dream?</h4>
+        <form><input type="text" ng-model="newItem" placeholder="Add to bucklist...">
+            <button class="btn btn-success" type="submit" ng-click="addItem(newItem)">Submit</button></form>
+        <h4>Trending</h4>
+        <ul ng-repeat="pi in popularItems">
+            <button class="btn btn-primary" ng-click="add(pi); removeTrending(pi)">+</button> {{pi}}
+        </ul>
+
+    </div>
+
 </div>

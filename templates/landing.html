@@ -1,6 +1,11 @@
 <header ng-controller="LandingController">
-    <div class="container">
-        <div class="col-xs-10 col-xs-offset-1 col-lg-3 col-lg-offset-8">
+    <div class="container login-area">
+        <div class="col-lg-5 col-lg-offset-2">
+            <div class="box">
+                <h2>Experience Together</h2>
+            </div>
+        </div>
+        <div class="col-xs-10 col-xs-offset-1 col-lg-3 col-lg-offset-1">
             <div ng-show="login">
                 <div class="row">
                     <div class="box text-center">
@@ -10,7 +15,7 @@
                         <input type="password" class="form-control box-input" placeholder="Password" ng-model="password" required>
                         <div class="incorrect" ng-show="incorrect">Incorrect email or password</div>
                         <button type="button" class="btn btn-primary btn-block" ng-click="emailLogin()">Log in</button>
-                        <p>or</p>
+                        <span class="or">or</span>
                         <a ng-click="facebookLogin()" class="btn btn-block btn-social btn-facebook fb-login"><span class="fa fa-facebook"></span>Log in with Facebook
                 </a>
 
@@ -33,8 +38,8 @@
                         <input type="text" class="form-control box-input" placeholder="Username" ng-model="username" required>
                         <input type="password" class="form-control box-input" placeholder="Password" ng-model="password" required>
                         <button type="button" class="btn btn-primary btn-block" ng-click="createUser()">Sign up</button>
-                        <p>or</p>
-                        <a ng-click="facebookLogin()" class="btn btn-block btn-social btn-facebook fb-login"><span class="fa fa-facebook"></span>Log in with Facebook
+                        <span class="or">or</span>
+                        <a ng-click="facebookLogin()" class="btn btn-block btn-social btn-facebook"><span class="fa fa-facebook"></span>Log in with Facebook
                 </a>
 
                     </div>
