@@ -31,6 +31,12 @@ angular.module('app')
             }).then(function (userData) {
                 $scope.authData = userData;
                 $scope.message = "User created with uid: " + userData.uid;
+                $scope.user = $firebaseObject(Firebase.child(userData.uid));
+                $scope.user.$loaded().then(function () {
+                    $scope.user.fullname = $scope.fullname;
+                    $scope.user.username = $scope.username;
+                    $scope.user.$save();
+                })
                 $scope.emailLogin();
             }).catch(function (error) {
                 $scope.error = error;
@@ -52,7 +58,7 @@ angular.module('app')
             });
         }
 
-        $scope.swapForm = function() {
+        $scope.swapForm = function () {
             $scope.login = !$scope.login;
         }
     })
