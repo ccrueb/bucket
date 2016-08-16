@@ -54,22 +54,29 @@
                 </div>
             </div>
         </div>
-
-        <div class="feed-post">
-
-        
+        <div ng-repeat="post in allPosts">
+            <div class="feed-post">
         <div class="post-header">
-            <div class="border">
+            <div class="row border row-fix">
+                <div class=" col-sm-1">
                 <img class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
             </div>
+            <div class="col-sm-11">
+                <div class="row">
+                    name <span class="float-right">{{timeSince(post.date)}}</span>
+                </div>
+                <div class="row">
+                    Information
+                </div>
+                
+            </div>
+            </div>
+            
 
         </div>
         <div class="post-body">
             <div class="border">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur ut tempora unde voluptates quam, sed quae soluta atque
-                neque, iusto nulla vitae repellat quo expedita placeat beatae in, reprehenderit adipisci. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Numquam natus qui repellat officiis id dolores facere saepe asperiores,
-                maxime eum amet voluptatibus sequi vel sint dolorem et commodi dolore ipsa.
+                {{post.text}}
             </div>
         </div>
         <div class="post-footer">
@@ -79,6 +86,8 @@
             
         </div>
     </div>
+        </div>
+        
     </div>
     <div class="col-sm-3 col-sm-offset-1">
 

@@ -6,8 +6,7 @@ angular.module('app')
             this.text = data.text;
             this.type = data.type;
             this.item = data.item;
-            var d = new Date();
-            this.date = d.getDate();
+            this.date = new Date().getTime() / 1000
             this.user = data.user
         }
 
