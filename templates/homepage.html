@@ -63,10 +63,10 @@
             </div>
             <div class="col-sm-11">
                 <div class="row">
-                    name <span class="float-right">{{timeSince(post.date)}}</span>
+                    {{post.user}} <span class="float-right">{{timeSince(post.date)}}</span>
                 </div>
                 <div class="row">
-                    Information
+                    {{post.type}} {{post.item.name}}
                 </div>
                 
             </div>
