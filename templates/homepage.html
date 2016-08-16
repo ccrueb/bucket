@@ -56,48 +56,53 @@
         </div>
         <div ng-repeat="post in allPosts | orderBy:'-date'">
             <div class="feed-post">
-        <div class="post-header">
-            <div class="row border row-fix">
-                <div class="col-sm-1 column-fix">
-                <img class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-            </div>
-            <div class="col-sm-offset-1 col-sm-10 column-fix post-words">
-                <div class="row row-fix">
-                    {{post.user}} <span class="float-right">{{timeSince(post.date)}}</span>
-                </div>
-                <div class="row row-fix">
-                    {{post.type}} {{post.item.name}}
-                </div>
-                
-            </div>
-            </div>
-            
+                <div class="post-header">
+                    <div class="row border row-fix">
+                        <div class="col-sm-1 column-fix">
+                            <img class="img-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                        </div>
+                        <div class="col-sm-offset-1 col-sm-10 column-fix post-words">
+                            <div class="row row-fix">
+                                <a ng-href="/#/user/{{post.user.toLowerCase()}}">{{post.user}}</a> <span class="float-right">{{timeSince(post.date)}}</span>
+                            </div>
+                            <div class="row row-fix">
+                                {{post.type}} {{post.item.name}}
+                            </div>
 
-        </div>
-        <div class="post-body">
-            <div class="border">
-                {{post.text}}
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="post-body">
+                    <div class="border">
+                        {{post.text}}
+                    </div>
+                </div>
+                <div class="post-footer unselectable">
+                    <a ng-click="favorite(post)"><span class="glyphicon glyphicon-heart footer-icons" aria-hidden="true"></span></a>{{post.likes.length}}
+                    <span class="glyphicon glyphicon-pencil footer-icons" aria-hidden="true"></span>2
+                    <span class="glyphicon glyphicon-option-horizontal footer-icons float-right" aria-hidden="true"></span>
+
+                </div>
             </div>
         </div>
-        <div class="post-footer">
-            <button ng-click="favorite(post)"><span class="glyphicon glyphicon-heart footer-icons" aria-hidden="true"></span></button>{{post.likes.length}}
-            <span class="glyphicon glyphicon-pencil footer-icons" aria-hidden="true"></span>2
-            <span class="glyphicon glyphicon-option-horizontal footer-icons float-right" aria-hidden="true"></span>
-            
-        </div>
-    </div>
-        </div>
-        
+
     </div>
     <div class="col-sm-3 col-sm-offset-1">
+        <div class="box">
+            <h4>What's your dream?</h4>
+            <form><input type="text" ng-model="newItem" placeholder="Add to bucklist...">
+                <button class="btn btn-success" type="submit" ng-click="addItem(newItem)">Submit</button></form>
+        </div>
 
-        <h4>What's your dream?</h4>
-        <form><input type="text" ng-model="newItem" placeholder="Add to bucklist...">
-            <button class="btn btn-success" type="submit" ng-click="addItem(newItem)">Submit</button></form>
-        <h4>Trending</h4>
-        <ul ng-repeat="pi in popularItems">
-            <button class="btn btn-primary quick-add" ng-click="add(pi); removeTrending(pi)">+</button> {{pi}}
-        </ul>
+        <div class="box box-two">
+            <h4>Trending</h4>
+            <ul ng-repeat="pi in popularItems">
+                <button class="btn btn-primary quick-add" ng-click="add(pi); removeTrending(pi)">+</button> {{pi}}
+            </ul>
+        </div>
+
 
     </div>
 

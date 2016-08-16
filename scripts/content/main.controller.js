@@ -72,6 +72,7 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
 
     $scope.favorite = function(post) {
         post.like();
+        post.$save();
     }
 
     $scope.timeSince = function(date) {

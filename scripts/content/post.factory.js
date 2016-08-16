@@ -6,7 +6,12 @@ angular.module('app')
             this.text = data.text;
             this.type = data.type;
             this.item = data.item;
-            this.date = new Date().getTime() / 1000;
+            if(data.date) {
+                this.date = data.date;
+            } else {
+                this.date = new Date().getTime() / 1000;
+            }
+            
             this.user = data.user;
             this.likes = []
             this.like = function (id) {
