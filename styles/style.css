@@ -552,6 +552,37 @@ ul {
   padding-left: 0px;
 }
 
+.img-circle {
+  border-radius: 50%;
+  height: 40px;
+}
+
+.post-header {
+  background-color: white;
+  padding: 5px;
+}
+
+.border {
+  border-bottom: 1px solid gainsboro;
+  padding-bottom: 3px;
+}
+
+.post-body {
+  background-color: white;
+  padding: 0px 10px;
+}
+
+.post-footer {
+  background-color: white;
+  padding: 5px;
+}
+
+.feed-post {
+  margin: 10px 0px;
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+}
+
 
 
 
