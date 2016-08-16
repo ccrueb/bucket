@@ -14,7 +14,7 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
             for (key in $scope.user.follows) {
                 $firebaseArray(Firebase.child($scope.user.follows[key]).child('posts')).$loaded().then(function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        $scope.allPosts.push(data[i]);
+                        $scope.allPosts.push(new Post(data[i]));
                     }
                 });
             }
@@ -24,7 +24,7 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
         //Add your posts to newsfeed
         $scope.posts.$loaded().then(function (data) {
             for (var i = 0; i < data.length; i++) {
-                $scope.allPosts.push(data[i]);
+                $scope.allPosts.push(new Post(data[i]));
             }
         });
     }
@@ -70,11 +70,13 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
         }
     }
 
+    $scope.favorite = function(post) {
+        post.like();
+    }
+
     $scope.timeSince = function(date) {
 
     var seconds = Math.floor(((new Date().getTime()/1000) - date));
-
-    console.log(date + " " + seconds);
 
     var interval = Math.floor(seconds / 31536000);
 
@@ -99,4 +101,6 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
     }
     return Math.floor(seconds) + " secs";
 }
+
+
 })
