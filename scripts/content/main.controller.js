@@ -1,13 +1,15 @@
 //Controls homepage
-angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User, Post) {
+angular.module('app').controller('MainController', function ($scope, Item, $firebaseArray, $firebaseObject, $firebaseAuth, $location, Firebase, PopularFactory, User, Post, Auth) {
 
     //Initalize values
     $scope.popularItems = PopularFactory.getPopularItems();
     $scope.auth = $firebaseAuth(Firebase);
     if ($scope.auth.$getAuth() != null) {
+        
+        User.setCurrentUser(Auth.$getAuth().uid);
         $scope.id = $scope.auth.$getAuth().uid;
 
-        $scope.user = $firebaseObject(Firebase.child($scope.id))
+        $scope.user = User.getCurrentUser();
         $scope.allPosts = [];
         //Add frind posts to newsfeed
         $scope.user.$loaded().then(function () {
