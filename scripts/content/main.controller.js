@@ -33,7 +33,7 @@ angular.module('app').controller('MainController', function ($scope, Item, $fire
 
     //Add item to bucketlist
     $scope.addItem = function (data) {
-        $scope.items.$add(new Item(data));
+        $scope.items.$add(data);
         $scope.newItem = '';
     }
 

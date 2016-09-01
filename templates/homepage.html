@@ -99,7 +99,7 @@
         <div class="box box-two">
             <h4>Trending</h4>
             <ul ng-repeat="pi in popularItems">
-                <button class="btn btn-primary quick-add" ng-click="add(pi); removeTrending(pi)">+</button> {{pi}}
+                <button class="btn btn-primary quick-add" ng-click="addItem(pi); removeTrending(pi)">+</button> {{pi.name}}
             </ul>
         </div>
 
